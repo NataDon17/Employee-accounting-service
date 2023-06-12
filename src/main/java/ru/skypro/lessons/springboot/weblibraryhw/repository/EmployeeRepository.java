@@ -1,17 +1,36 @@
 package ru.skypro.lessons.springboot.weblibraryhw.repository;
 
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+import ru.skypro.lessons.springboot.weblibraryhw.dto.EmployeeFullInfo;
 import ru.skypro.lessons.springboot.weblibraryhw.model.Employee;
 
 import java.util.Collection;
+import java.util.Optional;
 
-public interface EmployeeRepository {
-    Collection<Employee> getAllEmployees();
+public interface EmployeeRepository extends CrudRepository<Employee, Integer> {
 
-    Employee createEmployee(Employee employee);
+    @Query("SELECT new ru.skypro.lessons.springboot.weblibraryhw.dto." +
+            "EmployeeFullInfo(e.name , e.salary , p.name) " +
+            "FROM Employee e join fetch Position p " +
+            "WHERE e.position = p")
+    Collection<EmployeeFullInfo> findAllEmployeeFullInfo();
 
-    Employee updateEmployeeById(int id, Employee employee);
+    @Query("SELECT new ru.skypro.lessons.springboot.weblibraryhw.dto." +
+            "EmployeeFullInfo(e.name , e.salary , p.name) " +
+            "FROM Employee e join fetch Position p " +
+            "WHERE e.position = p AND e.id=?1")
+    Optional<EmployeeFullInfo> findByIdFullInfo(Integer id);
 
-    Employee getEmployeeById(int id);
+    @Query("SELECT new ru.skypro.lessons.springboot.weblibraryhw.dto." +
+            "EmployeeFullInfo(e.name , e.salary , p.name) " +
+            "FROM Employee e join fetch Position p " +
+            "WHERE e.position = p AND p.id=?1")
+    Collection<EmployeeFullInfo> findEmployeeByPosition(Integer position);
 
-    void deleteEmployeeById(int id);
+    @Query("SELECT new ru.skypro.lessons.springboot.weblibraryhw.dto." +
+            "EmployeeFullInfo(e.name, e.salary, p.name) " +
+            "FROM Employee e join fetch Position p " +
+            "WHERE e.position = p AND e.salary = (SELECT MAX(e2.salary) FROM Employee e2)")
+    Collection<EmployeeFullInfo> findEmployeeWithHighestSalary();
 }
