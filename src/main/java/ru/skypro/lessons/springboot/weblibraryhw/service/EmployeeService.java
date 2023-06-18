@@ -1,27 +1,37 @@
 package ru.skypro.lessons.springboot.weblibraryhw.service;
 
+import ru.skypro.lessons.springboot.weblibraryhw.dto.EmployeeDTO;
+import ru.skypro.lessons.springboot.weblibraryhw.dto.EmployeeFullInfo;
 import ru.skypro.lessons.springboot.weblibraryhw.model.Employee;
 
 import java.util.Collection;
 
 public interface EmployeeService {
-    Collection<Employee> getAllEmployees();
+    Collection<EmployeeFullInfo> getAllEmployees();
 
-    Employee createEmployee(Employee employee);
+    void createEmployee(EmployeeDTO employeeDTO);
 
-    Employee getEmployeeById(int id);
+    Employee getEmployeeById(Integer id);
 
-    Employee updateEmployeeById(int id, Employee employee);
+    void updateEmployeeById(Integer id, EmployeeDTO employeeDTO);
 
-    void deleteEmployeeById(int id);
+    void deleteEmployeeById(Integer id);
 
     Integer getSalarySum();
 
-    Employee getSalaryMin();
+    EmployeeFullInfo getSalaryMin();
 
-    Employee getSalaryMax();
+    EmployeeFullInfo getSalaryMax();
 
-    Collection<Employee> getSalaryAboveAverageEmployees();
+    Collection<EmployeeFullInfo> getSalaryAboveAverageEmployees();
 
-    Collection<Employee> getEmployeesByParamSalary(int paramSalary);
+    Collection<EmployeeFullInfo> getEmployeesByParamSalary(int paramSalary);
+
+    EmployeeFullInfo getEmployeeByIdFullInfo(Integer id);
+
+    Collection<EmployeeFullInfo> getEmployeesByPosition(Integer position);
+
+    Collection<EmployeeFullInfo> getEmployeesWithHighestSalary();
+
+    Collection<EmployeeDTO> getEmployeeWithPage(Integer page);
 }
