@@ -13,13 +13,13 @@ public class Report {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "file", columnDefinition = "text")
-    private String file;
+    @Column(name = "filePath", columnDefinition = "text")
+    private String filePath;
 
     @Override
     public String toString() {
         return "Отчет: " +
                 "номер отчета: " + id +
-                ", содержание: " + file + '\n';
+                ", содержание: " + filePath + '\n';
     }
 }
