@@ -1,12 +1,15 @@
 package ru.skypro.lessons.springboot.weblibraryhw.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import ru.skypro.lessons.springboot.weblibraryhw.dto.EmployeeDTO;
 import ru.skypro.lessons.springboot.weblibraryhw.dto.EmployeeFullInfo;
 import ru.skypro.lessons.springboot.weblibraryhw.model.Employee;
 import ru.skypro.lessons.springboot.weblibraryhw.service.EmployeeService;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -85,5 +88,10 @@ public class EmployeeController {
     @GetMapping("/employees/page")
     public Collection<EmployeeDTO> getEmployeeWithPage(@RequestParam("page") Integer page) {
         return employeeService.getEmployeeWithPage(page);
+    }
+
+    @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public void createEmployeeFromFile(@RequestParam("file") MultipartFile file) throws IOException {
+        employeeService.createEmployeeFromFile(file);
     }
 }

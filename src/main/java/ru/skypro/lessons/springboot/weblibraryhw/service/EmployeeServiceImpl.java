@@ -1,9 +1,12 @@
 package ru.skypro.lessons.springboot.weblibraryhw.service;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import ru.skypro.lessons.springboot.weblibraryhw.dto.EmployeeDTO;
 import ru.skypro.lessons.springboot.weblibraryhw.dto.EmployeeFullInfo;
 import ru.skypro.lessons.springboot.weblibraryhw.exception.EmployeeNotFoundException;
@@ -11,6 +14,7 @@ import ru.skypro.lessons.springboot.weblibraryhw.model.Employee;
 import ru.skypro.lessons.springboot.weblibraryhw.repository.EmployeeRepository;
 import ru.skypro.lessons.springboot.weblibraryhw.repository.PagingAndSortingRepository;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -88,6 +92,15 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeList.stream()
                 .map(EmployeeDTO::fromEmployee)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void createEmployeeFromFile(MultipartFile file) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        EmployeeDTO[] newEmployees = objectMapper.readValue(file.getBytes(), EmployeeDTO[].class);
+        for (EmployeeDTO e : newEmployees) {
+            createEmployee(e);
+        }
     }
 
     @Override
