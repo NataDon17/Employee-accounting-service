@@ -1,9 +1,12 @@
 package ru.skypro.lessons.springboot.weblibraryhw.service;
 
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import ru.skypro.lessons.springboot.weblibraryhw.dto.EmployeeDTO;
 import ru.skypro.lessons.springboot.weblibraryhw.dto.EmployeeFullInfo;
 import ru.skypro.lessons.springboot.weblibraryhw.model.Employee;
 
+import java.io.IOException;
 import java.util.Collection;
 
 public interface EmployeeService {
@@ -34,4 +37,6 @@ public interface EmployeeService {
     Collection<EmployeeFullInfo> getEmployeesWithHighestSalary();
 
     Collection<EmployeeDTO> getEmployeeWithPage(Integer page);
+
+    void createEmployeeFromFile(MultipartFile file) throws IOException;
 }

@@ -5,9 +5,11 @@ import lombok.Setter;
 import ru.skypro.lessons.springboot.weblibraryhw.model.Employee;
 import ru.skypro.lessons.springboot.weblibraryhw.model.Position;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
-public class EmployeeDTO {
+public class EmployeeDTO implements Serializable {
     private Integer id;
     private String name;
     private int salary;
