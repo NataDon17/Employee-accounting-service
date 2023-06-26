@@ -1,20 +1,17 @@
 package ru.skypro.lessons.springboot.weblibraryhw.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import ru.skypro.lessons.springboot.weblibraryhw.dto.EmployeeDTO;
 import ru.skypro.lessons.springboot.weblibraryhw.dto.EmployeeFullInfo;
 import ru.skypro.lessons.springboot.weblibraryhw.model.Employee;
 import ru.skypro.lessons.springboot.weblibraryhw.service.EmployeeService;
 
-import java.io.IOException;
 import java.util.Collection;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("employee")
+@RequestMapping("/employee")
 @RequiredArgsConstructor
 public class EmployeeController {
     private final EmployeeService employeeService;
@@ -44,54 +41,33 @@ public class EmployeeController {
         return employeeService.getSalaryAboveAverageEmployees();
     }
 
-    @PostMapping("/employees")
-    public void createEmployee(@RequestBody EmployeeDTO employeeDTO) {
-
-        employeeService.createEmployee(employeeDTO);
-    }
-
-    @GetMapping("/employees/{id}")
+    @GetMapping("/{id}")
     public Employee getEmployeeById(@PathVariable Integer id) {
         return employeeService.getEmployeeById(id);
     }
 
-    @GetMapping("/employees/salaryHigherThan")
+    @GetMapping("/salaryHigherThan")
     public Collection<EmployeeFullInfo> getEmployeesByParamSalary(@RequestParam("paramSalary") int paramSalary) {
         return employeeService.getEmployeesByParamSalary(paramSalary);
     }
 
-    @PutMapping("/employees/{id}")
-    public void updateEmployeeById(@PathVariable Integer id, @RequestBody EmployeeDTO employeeDTO) {
-        employeeService.updateEmployeeById(id, employeeDTO);
-    }
-
-    @DeleteMapping("/employees/{id}")
-    public void deleteEmployeeById(@PathVariable Integer id) {
-        employeeService.deleteEmployeeById(id);
-    }
-
-    @GetMapping("/employees/{id}/fullInfo")
+    @GetMapping("/{id}/fullInfo")
     public EmployeeFullInfo getEmployeeByIdFullInfo(@PathVariable Integer id) {
         return employeeService.getEmployeeByIdFullInfo(id);
     }
 
-    @GetMapping("/employees/position")
+    @GetMapping("/position")
     public Collection<EmployeeFullInfo> getEmployeesByPosition(@RequestParam Optional<Integer> position) {
         return employeeService.getEmployeesByPosition(position.orElse(null));
     }
 
-    @GetMapping("/employees/withHighestSalary")
+    @GetMapping("/withHighestSalary")
     public Collection<EmployeeFullInfo> getEmployeesWithHighestSalary() {
         return employeeService.getEmployeesWithHighestSalary();
     }
 
-    @GetMapping("/employees/page")
+    @GetMapping("/page")
     public Collection<EmployeeDTO> getEmployeeWithPage(@RequestParam("page") Integer page) {
         return employeeService.getEmployeeWithPage(page);
-    }
-
-    @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public void createEmployeeFromFile(@RequestParam("file") MultipartFile file) throws IOException {
-        employeeService.createEmployeeFromFile(file);
     }
 }
