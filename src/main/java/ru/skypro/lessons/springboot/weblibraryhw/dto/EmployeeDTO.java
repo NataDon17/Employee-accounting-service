@@ -2,6 +2,7 @@ package ru.skypro.lessons.springboot.weblibraryhw.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import ru.skypro.lessons.springboot.weblibraryhw.model.Employee;
 import ru.skypro.lessons.springboot.weblibraryhw.model.Position;
 
@@ -9,6 +10,7 @@ import java.io.Serializable;
 
 @Getter
 @Setter
+@ToString
 public class EmployeeDTO implements Serializable {
     private Integer id;
     private String name;
