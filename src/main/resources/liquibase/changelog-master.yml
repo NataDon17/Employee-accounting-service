@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - include:
+      file: liquibase/changesets/02072023_create_employee1.yml
+  - include:
+      file: liquibase/changesets/02072023_create_position.yml
+  - include:
+      file: liquibase/changesets/02072023_create_report.yml
+  - include:
+      file: liquibase/changesets/02072023_create_authUser.yml

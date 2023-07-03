@@ -1,0 +1,31 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1 # идентификатор набора изменений
+      author: developer # имя разработчика, который добавил набор изменений
+      changes: # список изменений в этом наборе
+        - tagDatabase: # liquibase — устанавливаем тег состоянию базы данных
+            tag: 1.0 # указываем значение тега
+        - createTable: # команда liquibase — создает таблицу
+            tableName: employee1 # название таблицы
+            columns: # колонки к данной таблице
+              - column: # колонка
+                  name: id # название колонки
+                  type: integer # тип
+                  autoIncrement: true # признак автоинкремента колонки
+                  constraints: # ограничения колонки
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: varchar(255)
+              - column:
+                  name: salary
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: position_id
+                  type: int
+                  constraints: # ограничения колонки
+                    foreignKeyName: position_id
+                    referencedTableName: position
+                    referencedColumnName: id
