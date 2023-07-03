@@ -14,7 +14,7 @@ import lombok.Setter;
 @Setter
 public class AuthUser {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "username", nullable = false, unique = true)
     private String userName;
