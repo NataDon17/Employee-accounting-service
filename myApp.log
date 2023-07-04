@@ -2,3 +2,203 @@
 08:06:39.964 [http-nio-8080-exec-1] ERROR r.s.l.s.w.service.EmployeeService - There is no report by id 2 
 08:07:41.357 [http-nio-8080-exec-4] ERROR r.s.l.s.w.service.EmployeeService - There is no report by id 6 
 08:41:46.645 [http-nio-8080-exec-3] ERROR r.s.l.s.w.service.EmployeeService - Неверный запрос пользователя
+06:59:30.048 [main] ERROR o.s.boot.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: Validation Failed:
+     1 changesets check sum
+          liquibase/changesets/02072023_create_room.yml::1::developer was: 8:5e1250fa83a20f7e5e84ed3d2154c6e3 but is now: 8:d940c51cdb7f4d5c474fe020bfa03cd2
+
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1770)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:598)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:313)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1156)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:931)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:608)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:733)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:435)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1305)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1294)
+	at ru.skypro.lessons.springboot.weblibraryhw.WebLibraryHwApplication.main(WebLibraryHwApplication.java:10)
+Caused by: liquibase.exception.ValidationFailedException: Validation Failed:
+     1 changesets check sum
+          liquibase/changesets/02072023_create_room.yml::1::developer was: 8:5e1250fa83a20f7e5e84ed3d2154c6e3 but is now: 8:d940c51cdb7f4d5c474fe020bfa03cd2
+
+	at liquibase.changelog.DatabaseChangeLog.validate(DatabaseChangeLog.java:357)
+	at liquibase.Liquibase$16.run(Liquibase.java:2296)
+	at liquibase.Scope.lambda$child$0(Scope.java:187)
+	at liquibase.Scope.child(Scope.java:196)
+	at liquibase.Scope.child(Scope.java:186)
+	at liquibase.Scope.child(Scope.java:165)
+	at liquibase.Liquibase.runInScope(Liquibase.java:2639)
+	at liquibase.Liquibase.listUnrunChangeSets(Liquibase.java:2286)
+	at liquibase.Liquibase.isUpToDateFastCheck(Liquibase.java:506)
+	at liquibase.Liquibase.lambda$update$1(Liquibase.java:237)
+	at liquibase.Scope.lambda$child$0(Scope.java:187)
+	at liquibase.Scope.child(Scope.java:196)
+	at liquibase.Scope.child(Scope.java:186)
+	at liquibase.Scope.child(Scope.java:165)
+	at liquibase.Liquibase.runInScope(Liquibase.java:2639)
+	at liquibase.Liquibase.update(Liquibase.java:236)
+	at liquibase.Liquibase.update(Liquibase.java:221)
+	at liquibase.integration.spring.SpringLiquibase.performUpdate(SpringLiquibase.java:329)
+	at liquibase.integration.spring.SpringLiquibase.afterPropertiesSet(SpringLiquibase.java:284)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1816)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1766)
+	... 18 common frames omitted
+07:01:36.092 [main] ERROR o.s.boot.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: Validation Failed:
+     1 changesets check sum
+          liquibase/changesets/02072023_create_room.yml::1::developer was: 8:5e1250fa83a20f7e5e84ed3d2154c6e3 but is now: 8:d940c51cdb7f4d5c474fe020bfa03cd2
+
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1770)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:598)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:313)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1156)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:931)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:608)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:733)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:435)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1305)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1294)
+	at ru.skypro.lessons.springboot.weblibraryhw.WebLibraryHwApplication.main(WebLibraryHwApplication.java:10)
+Caused by: liquibase.exception.ValidationFailedException: Validation Failed:
+     1 changesets check sum
+          liquibase/changesets/02072023_create_room.yml::1::developer was: 8:5e1250fa83a20f7e5e84ed3d2154c6e3 but is now: 8:d940c51cdb7f4d5c474fe020bfa03cd2
+
+	at liquibase.changelog.DatabaseChangeLog.validate(DatabaseChangeLog.java:357)
+	at liquibase.Liquibase$16.run(Liquibase.java:2296)
+	at liquibase.Scope.lambda$child$0(Scope.java:187)
+	at liquibase.Scope.child(Scope.java:196)
+	at liquibase.Scope.child(Scope.java:186)
+	at liquibase.Scope.child(Scope.java:165)
+	at liquibase.Liquibase.runInScope(Liquibase.java:2639)
+	at liquibase.Liquibase.listUnrunChangeSets(Liquibase.java:2286)
+	at liquibase.Liquibase.isUpToDateFastCheck(Liquibase.java:506)
+	at liquibase.Liquibase.lambda$update$1(Liquibase.java:237)
+	at liquibase.Scope.lambda$child$0(Scope.java:187)
+	at liquibase.Scope.child(Scope.java:196)
+	at liquibase.Scope.child(Scope.java:186)
+	at liquibase.Scope.child(Scope.java:165)
+	at liquibase.Liquibase.runInScope(Liquibase.java:2639)
+	at liquibase.Liquibase.update(Liquibase.java:236)
+	at liquibase.Liquibase.update(Liquibase.java:221)
+	at liquibase.integration.spring.SpringLiquibase.performUpdate(SpringLiquibase.java:329)
+	at liquibase.integration.spring.SpringLiquibase.afterPropertiesSet(SpringLiquibase.java:284)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1816)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1766)
+	... 18 common frames omitted
+08:04:10.069 [main] ERROR liquibase.changelog - ChangeSet liquibase/changesets/02072023_create_authUser.yml::4::developer encountered an exception.
+08:04:10.331 [main] ERROR o.s.boot.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.MigrationFailedException: Migration failed for changeset liquibase/changesets/02072023_create_authUser.yml::4::developer:
+     Reason: liquibase.exception.DatabaseException: ERROR: type "long" does not exist
+  Позиция: 35 [Failed SQL: (0) CREATE TABLE public.auth_user (id LONG GENERATED BY DEFAULT AS IDENTITY NOT NULL, username VARCHAR(255), password VARCHAR(255), role_name VARCHAR(255), CONSTRAINT auth_user_pkey PRIMARY KEY (id))]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1770)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:598)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:313)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1156)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:931)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:608)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:733)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:435)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1305)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1294)
+	at ru.skypro.lessons.springboot.weblibraryhw.WebLibraryHwApplication.main(WebLibraryHwApplication.java:10)
+Caused by: liquibase.exception.LiquibaseException: liquibase.exception.MigrationFailedException: Migration failed for changeset liquibase/changesets/02072023_create_authUser.yml::4::developer:
+     Reason: liquibase.exception.DatabaseException: ERROR: type "long" does not exist
+  Позиция: 35 [Failed SQL: (0) CREATE TABLE public.auth_user (id LONG GENERATED BY DEFAULT AS IDENTITY NOT NULL, username VARCHAR(255), password VARCHAR(255), role_name VARCHAR(255), CONSTRAINT auth_user_pkey PRIMARY KEY (id))]
+	at liquibase.changelog.ChangeLogIterator.run(ChangeLogIterator.java:136)
+	at liquibase.Liquibase.lambda$null$0(Liquibase.java:297)
+	at liquibase.Scope.lambda$child$0(Scope.java:187)
+	at liquibase.Scope.child(Scope.java:196)
+	at liquibase.Scope.child(Scope.java:186)
+	at liquibase.Scope.child(Scope.java:165)
+	at liquibase.Scope.child(Scope.java:256)
+	at liquibase.Liquibase.lambda$update$1(Liquibase.java:295)
+	at liquibase.Scope.lambda$child$0(Scope.java:187)
+	at liquibase.Scope.child(Scope.java:196)
+	at liquibase.Scope.child(Scope.java:186)
+	at liquibase.Scope.child(Scope.java:165)
+	at liquibase.Liquibase.runInScope(Liquibase.java:2639)
+	at liquibase.Liquibase.update(Liquibase.java:236)
+	at liquibase.Liquibase.update(Liquibase.java:221)
+	at liquibase.integration.spring.SpringLiquibase.performUpdate(SpringLiquibase.java:329)
+	at liquibase.integration.spring.SpringLiquibase.afterPropertiesSet(SpringLiquibase.java:284)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1816)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1766)
+	... 18 common frames omitted
+Caused by: liquibase.exception.MigrationFailedException: Migration failed for changeset liquibase/changesets/02072023_create_authUser.yml::4::developer:
+     Reason: liquibase.exception.DatabaseException: ERROR: type "long" does not exist
+  Позиция: 35 [Failed SQL: (0) CREATE TABLE public.auth_user (id LONG GENERATED BY DEFAULT AS IDENTITY NOT NULL, username VARCHAR(255), password VARCHAR(255), role_name VARCHAR(255), CONSTRAINT auth_user_pkey PRIMARY KEY (id))]
+	at liquibase.changelog.ChangeSet.execute(ChangeSet.java:744)
+	at liquibase.changelog.visitor.UpdateVisitor.visit(UpdateVisitor.java:59)
+	at liquibase.changelog.ChangeLogIterator$2.lambda$null$0(ChangeLogIterator.java:124)
+	at liquibase.Scope.lambda$child$0(Scope.java:187)
+	at liquibase.Scope.child(Scope.java:196)
+	at liquibase.Scope.child(Scope.java:186)
+	at liquibase.Scope.child(Scope.java:165)
+	at liquibase.changelog.ChangeLogIterator$2.lambda$run$1(ChangeLogIterator.java:124)
+	at liquibase.Scope.lambda$child$0(Scope.java:187)
+	at liquibase.Scope.child(Scope.java:196)
+	at liquibase.Scope.child(Scope.java:186)
+	at liquibase.Scope.child(Scope.java:165)
+	at liquibase.Scope.child(Scope.java:256)
+	at liquibase.changelog.ChangeLogIterator$2.run(ChangeLogIterator.java:105)
+	at liquibase.Scope.lambda$child$0(Scope.java:187)
+	at liquibase.Scope.child(Scope.java:196)
+	at liquibase.Scope.child(Scope.java:186)
+	at liquibase.Scope.child(Scope.java:165)
+	at liquibase.Scope.child(Scope.java:256)
+	at liquibase.Scope.child(Scope.java:260)
+	at liquibase.changelog.ChangeLogIterator.run(ChangeLogIterator.java:75)
+	... 36 common frames omitted
+Caused by: liquibase.exception.DatabaseException: ERROR: type "long" does not exist
+  Позиция: 35 [Failed SQL: (0) CREATE TABLE public.auth_user (id LONG GENERATED BY DEFAULT AS IDENTITY NOT NULL, username VARCHAR(255), password VARCHAR(255), role_name VARCHAR(255), CONSTRAINT auth_user_pkey PRIMARY KEY (id))]
+	at liquibase.executor.jvm.JdbcExecutor$ExecuteStatementCallback.doInStatement(JdbcExecutor.java:445)
+	at liquibase.executor.jvm.JdbcExecutor.execute(JdbcExecutor.java:77)
+	at liquibase.executor.jvm.JdbcExecutor.execute(JdbcExecutor.java:160)
+	at liquibase.database.AbstractJdbcDatabase.execute(AbstractJdbcDatabase.java:1270)
+	at liquibase.database.AbstractJdbcDatabase.executeStatements(AbstractJdbcDatabase.java:1252)
+	at liquibase.changelog.ChangeSet.execute(ChangeSet.java:702)
+	... 56 common frames omitted
+Caused by: org.postgresql.util.PSQLException: ERROR: type "long" does not exist
+  Позиция: 35
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:355)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:490)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:408)
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:329)
+	at org.postgresql.jdbc.PgStatement.executeCachedSql(PgStatement.java:315)
+	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:291)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:286)
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94)
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java)
+	at liquibase.executor.jvm.JdbcExecutor$ExecuteStatementCallback.doInStatement(JdbcExecutor.java:441)
+	... 61 common frames omitted
+08:16:12.560 [http-nio-8080-exec-4] ERROR r.s.l.s.w.service.EmployeeService - Неверный запрос пользователя
+08:18:07.135 [http-nio-8080-exec-10] ERROR r.s.l.s.w.service.EmployeeService - There is no employee in file org.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile@68d64542 
+08:18:07.187 [http-nio-8080-exec-10] ERROR r.s.l.s.w.service.EmployeeService - Неверный запрос пользователя
+08:19:28.007 [http-nio-8080-exec-2] ERROR r.s.l.s.w.service.EmployeeService - There is no report by id 1 
