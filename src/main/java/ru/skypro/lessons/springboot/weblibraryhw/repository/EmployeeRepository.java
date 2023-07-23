@@ -1,14 +1,16 @@
 package ru.skypro.lessons.springboot.weblibraryhw.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 import ru.skypro.lessons.springboot.weblibraryhw.dto.EmployeeFullInfo;
 import ru.skypro.lessons.springboot.weblibraryhw.model.Employee;
 
 import java.util.Collection;
 import java.util.Optional;
-
-public interface EmployeeRepository extends CrudRepository<Employee, Integer> {
+@Repository
+public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
     @Query("SELECT new ru.skypro.lessons.springboot.weblibraryhw.dto." +
             "EmployeeFullInfo(e.name , e.salary , p.name) " +

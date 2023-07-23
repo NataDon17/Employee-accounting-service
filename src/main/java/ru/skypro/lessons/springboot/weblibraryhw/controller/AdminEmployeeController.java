@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.skypro.lessons.springboot.weblibraryhw.dto.EmployeeDTO;
 import ru.skypro.lessons.springboot.weblibraryhw.dto.EmployeeFullInfo;
+import ru.skypro.lessons.springboot.weblibraryhw.exception.EmployeeNotFoundException;
 import ru.skypro.lessons.springboot.weblibraryhw.service.EmployeeService;
 
 import java.io.IOException;
