@@ -41,6 +41,7 @@ public class ReportServiceImplTest {
         report.setFilePath(String.valueOf(path.toAbsolutePath()));
         reportRepositoryMock.save(report);
         out.createReport();
+        verify(reportRepositoryMock, times(1)).createReport();
     }
 
     @Test

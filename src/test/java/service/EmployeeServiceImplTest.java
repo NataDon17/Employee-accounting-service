@@ -29,8 +29,8 @@ import java.util.stream.Stream;
 
 import static constants.EmployeeConstants.*;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -55,6 +55,7 @@ public class EmployeeServiceImplTest {
         when(employeeRepositoryMock.save(employee))
                 .thenReturn(employee);
         out.createEmployee(EmployeeDTO.fromEmployee(employee));
+        verify(employeeRepositoryMock, times(1)).save(employee);
     }
 
     @Test
@@ -175,6 +176,7 @@ public class EmployeeServiceImplTest {
                 MediaType.MULTIPART_FORM_DATA_VALUE,
                 json.getBytes());
         out.createEmployeeFromFile(file);
+        verify(employeeRepositoryMock, times(1)).save(any(Employee.class));
     }
 
     public static Stream<Arguments> provideParamsForTests() {
