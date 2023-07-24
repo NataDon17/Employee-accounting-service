@@ -1,5 +1,6 @@
 package ru.skypro.lessons.springboot.weblibraryhw.dto;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,6 +11,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode
 public class ReportDTO implements Serializable {
     private Integer id;
     private String filePath;

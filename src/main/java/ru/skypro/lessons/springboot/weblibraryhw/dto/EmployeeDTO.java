@@ -10,6 +10,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode
 @ToString
 public class EmployeeDTO implements Serializable {
     private Integer id;

@@ -9,6 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode
 public class Report {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

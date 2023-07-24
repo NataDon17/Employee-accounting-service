@@ -2,13 +2,21 @@ package service;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
+import ru.skypro.lessons.springboot.weblibraryhw.dto.EmployeeDTO;
 import ru.skypro.lessons.springboot.weblibraryhw.exception.EmployeeNotFoundException;
 import ru.skypro.lessons.springboot.weblibraryhw.model.Employee;
+import ru.skypro.lessons.springboot.weblibraryhw.model.Position;
 import ru.skypro.lessons.springboot.weblibraryhw.repository.EmployeeRepository;
 import ru.skypro.lessons.springboot.weblibraryhw.repository.PagingAndSortingRepository;
 import ru.skypro.lessons.springboot.weblibraryhw.service.EmployeeServiceImpl;
@@ -17,12 +25,12 @@ import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static constants.EmployeeConstants.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertIterableEquals;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -41,12 +49,12 @@ public class EmployeeServiceImplTest {
         assertIterableEquals(EMPLOYEE_FULL_INFO_LIST, out.getAllEmployees());
     }
 
-    @Test
-    public void createEmployeeNewEmployeeSaveEmployee() {
-        when(employeeRepositoryMock.save(EMPLOYEE_DTO_1.toEmployee()))
-                .thenReturn(EMPLOYEE_DTO_1.toEmployee());
-        out.createEmployee(EMPLOYEE_DTO_1);
-        verify(employeeRepositoryMock, times(1)).save(EMPLOYEE_DTO_1.toEmployee());
+    @ParameterizedTest
+    @MethodSource("provideParamsForTests")
+    public void createEmployeeNewEmployeeSaveEmployee(Employee employee) {
+        when(employeeRepositoryMock.save(employee))
+                .thenReturn(employee);
+        out.createEmployee(EmployeeDTO.fromEmployee(employee));
     }
 
     @Test
@@ -122,7 +130,7 @@ public class EmployeeServiceImplTest {
 
     @Test
     public void getEmployeesByParamSalaryTestParamReturnListEmployees() {
-        Integer testParam = 26000;
+        int testParam = 26000;
         List<Employee> testEmployeesList = EMPLOYEE_LIST.stream()
                 .filter(employee -> employee.getSalary() > testParam)
                 .collect(Collectors.toList());
@@ -139,13 +147,13 @@ public class EmployeeServiceImplTest {
 
     @Test
     public void getEmployeeWithPageTestPageReturnListEmployeesByPage() {
-//        Page<Employee> testEmployeeListPage = new PageImpl<>(EMPLOYEE_LIST);
-//        when(pagingRepositoryMock.findAll(PageRequest.of(0, 10)))
-//                .thenReturn(testEmployeeListPage);
-//        List<EmployeeDTO> testEmployeesList = testEmployeeListPage.stream()
-//                .map(EmployeeDTO::fromEmployee)
-//                .toList();
-//        assertEquals(testEmployeesList, out.getEmployeeWithPage(0));
+        Page<Employee> testEmployeeListPage = new PageImpl<>(EMPLOYEE_LIST);
+        when(pagingRepositoryMock.findAll(PageRequest.of(0, 10)))
+                .thenReturn(testEmployeeListPage);
+        List<EmployeeDTO> testEmployeesList = testEmployeeListPage.stream()
+                .map(EmployeeDTO::fromEmployee)
+                .collect(Collectors.toList());
+        assertEquals(testEmployeesList, out.getEmployeeWithPage(0));
     }
 
     @Test
@@ -167,5 +175,20 @@ public class EmployeeServiceImplTest {
                 MediaType.MULTIPART_FORM_DATA_VALUE,
                 json.getBytes());
         out.createEmployeeFromFile(file);
+    }
+
+    public static Stream<Arguments> provideParamsForTests() {
+        Employee employeeCorrect = new Employee(
+                1,
+                "Nata",
+                25000,
+                new Position(2, "Разработчик"));
+        Employee employeeEmpty = new Employee();
+        Employee employeeDefault = new Employee(1, "по умолчанию", 0, null);
+        return Stream.of(
+                Arguments.of(employeeCorrect, "Корректный сотрудник"),
+                Arguments.of(employeeEmpty, "Поля сотрудника не заполнены"),
+                Arguments.of(employeeDefault, "Сотрудник по умоланию")
+        );
     }
 }
