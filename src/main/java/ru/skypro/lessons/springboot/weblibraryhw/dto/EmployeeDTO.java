@@ -1,15 +1,16 @@
 package ru.skypro.lessons.springboot.weblibraryhw.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import ru.skypro.lessons.springboot.weblibraryhw.model.Employee;
 import ru.skypro.lessons.springboot.weblibraryhw.model.Position;
 
 import java.io.Serializable;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode
 @ToString
 public class EmployeeDTO implements Serializable {
     private Integer id;

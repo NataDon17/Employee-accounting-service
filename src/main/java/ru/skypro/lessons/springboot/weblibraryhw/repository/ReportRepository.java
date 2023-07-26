@@ -2,11 +2,12 @@ package ru.skypro.lessons.springboot.weblibraryhw.repository;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 import ru.skypro.lessons.springboot.weblibraryhw.dto.ReportDTO;
 import ru.skypro.lessons.springboot.weblibraryhw.model.Report;
 
 import java.util.List;
-
+@Repository
 public interface ReportRepository extends CrudRepository<Report, Integer> {
     @Query("SELECT new ru.skypro.lessons.springboot.weblibraryhw.dto.ReportDTO(\n " +
             " p.name, \n" +

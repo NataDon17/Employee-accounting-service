@@ -1,6 +1,5 @@
 package ru.skypro.lessons.springboot.weblibraryhw.service;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -110,10 +109,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void updateEmployeeById(Integer id, EmployeeDTO employeeDTO) {
-        if (employeeRepository.existsById(id)) {
-            employeeRepository.save(employeeDTO.toEmployee());
-        }
-        throw new EmployeeNotFoundException();
+        Employee employee = employeeRepository.findById(id)
+                .orElseThrow(EmployeeNotFoundException::new);
+        employeeDTO.setId(employee.getId());
+        employeeRepository.save(employeeDTO.toEmployee());
     }
 
     @Override
