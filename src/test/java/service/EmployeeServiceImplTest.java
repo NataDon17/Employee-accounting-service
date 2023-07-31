@@ -28,8 +28,6 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static constants.EmployeeConstants.*;
-
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -186,7 +184,7 @@ public class EmployeeServiceImplTest {
                 25000,
                 new Position(2, "Разработчик"));
         Employee employeeEmpty = new Employee();
-        Employee employeeDefault = new Employee(1, "по умолчанию", 0, null);
+        Employee employeeDefault = new Employee(1, "по умолчанию", 0, new Position());
         return Stream.of(
                 Arguments.of(employeeCorrect, "Корректный сотрудник"),
                 Arguments.of(employeeEmpty, "Поля сотрудника не заполнены"),
