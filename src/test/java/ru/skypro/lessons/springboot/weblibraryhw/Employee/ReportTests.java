@@ -28,14 +28,13 @@ public class ReportTests {
     private ObjectMapper objectMapper;
 
     @BeforeEach
-    void cleanEmployeeTable() {
+    void cleanReportTable() {
         reportRepository.deleteAll();
     }
 
     @Test
     public void createReport_whenIdReturn_NewReportId() throws Exception {
-        String report = objectMapper.writeValueAsString(REPORT_DTO);
-
+        String report = objectMapper.writeValueAsString(REPORT_DTO_LIST);
         mockMvc.perform(post("/report/")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(report))
@@ -46,12 +45,12 @@ public class ReportTests {
     @Test
     public void givenReportById_whenIsId_ReturnReport() throws Exception {
         String report = objectMapper.writeValueAsString(REPORT);
-
         mockMvc.perform(post("/report/")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(report))
                 .andExpect(status().isOk());
-        mockMvc.perform(get("/report/{id}", 1))
+        int id = REPORT.getId();
+        mockMvc.perform(get("/report/{id}", id))
                 .andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();
     }
@@ -59,7 +58,6 @@ public class ReportTests {
     @Test
     void givenNoReportInDatabase_whenGetOnReportList_thenNotFound() throws Exception {
         String report = objectMapper.writeValueAsString(REPORT);
-
         mockMvc.perform(post("/report/")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(report))

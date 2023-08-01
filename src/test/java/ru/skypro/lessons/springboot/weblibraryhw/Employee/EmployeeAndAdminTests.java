@@ -289,8 +289,8 @@ public class EmployeeAndAdminTests {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray())
                 .andExpect(jsonPath("$.length()").value(2))
-                .andExpect(jsonPath("$[0].name").value("Sonya"))
-                .andExpect(jsonPath("$[1].name").value("Alena"));
+                .andExpect(jsonPath("$[0].positionName").value("Тестировщик"))
+                .andExpect(jsonPath("$[1].positionName").value("Тестировщик"));
     }
 
     @Test
