@@ -59,8 +59,8 @@ public class EmployeeServiceImplTest {
     @Test
     public void updateEmployeeByIdIsIdUpdateEmployee() {
         when(employeeRepositoryMock.findById(anyInt()))
-                .thenReturn(Optional.of(EMPLOYEE_1));
-        assertEquals(EMPLOYEE_1, out.getEmployeeById(1));
+                .thenReturn(Optional.of(EMPLOYEE_DTO_1.toEmployee()));
+        assertEquals(EMPLOYEE_DTO_1, out.getEmployeeById(1));
         out.updateEmployeeById(1, EMPLOYEE_DTO_1);
         verify(employeeRepositoryMock, times(1)).save(EMPLOYEE_DTO_1.toEmployee());
     }
@@ -68,8 +68,8 @@ public class EmployeeServiceImplTest {
     @Test
     public void getEmployeeByIdIsIdReturnEmployee() {
         when(employeeRepositoryMock.findById(anyInt()))
-                .thenReturn(Optional.of(EMPLOYEE_1));
-        assertEquals(EMPLOYEE_1, out.getEmployeeById(1));
+                .thenReturn(Optional.of(EMPLOYEE_DTO_1.toEmployee()));
+        assertEquals(EMPLOYEE_DTO_1, out.getEmployeeById(1));
         verify(employeeRepositoryMock, times(1)).findById(anyInt());
     }
 

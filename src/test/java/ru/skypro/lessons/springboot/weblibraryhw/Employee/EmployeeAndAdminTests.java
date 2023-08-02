@@ -16,6 +16,7 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.web.servlet.MockMvc;
+import ru.skypro.lessons.springboot.weblibraryhw.dto.EmployeeDTO;
 import ru.skypro.lessons.springboot.weblibraryhw.repository.EmployeeRepository;
 
 import java.nio.file.Files;
@@ -48,7 +49,7 @@ public class EmployeeAndAdminTests {
 
     @Test
     void givenNoEmployeesInDatabase_whenEmployeeAdded_thenItExistsInList() throws Exception {
-        String employee = objectMapper.writeValueAsString(EMPLOYEE_1);
+        String employee = objectMapper.writeValueAsString(EMPLOYEE_DTO_1);
 
         mockMvc.perform(post("/admin/employees/add")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -69,7 +70,7 @@ public class EmployeeAndAdminTests {
 
     @Test
     public void givenId_whenGetExistingEmployee_EmployeeReturned() throws Exception {
-        String employee = objectMapper.writeValueAsString(EMPLOYEE_1);
+        String employee = objectMapper.writeValueAsString(EMPLOYEE_DTO_1);
 
         mockMvc.perform(post("/admin/employees/add")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -77,7 +78,7 @@ public class EmployeeAndAdminTests {
                 .andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();
 
-        int id = EMPLOYEE_1.getId();
+        int id = EMPLOYEE_DTO_1.getId();
         mockMvc.perform(get("/employee/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -87,8 +88,8 @@ public class EmployeeAndAdminTests {
     }
 
     @Test
-    void givenNoUsersInDatabase_whenEditOnEmptyList_thenNotFound() throws Exception {
-        String employee = objectMapper.writeValueAsString(EMPLOYEE_3);
+    void givenNoEmployeeInDatabase_whenEditOnEmptyList_thenNotFound() throws Exception {
+        String employee = objectMapper.writeValueAsString(EMPLOYEE_DTO_3);
         mockMvc.perform(post("/admin/employees/add")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(employee));
@@ -100,18 +101,22 @@ public class EmployeeAndAdminTests {
     }
 
     @Test
-    void givenThereIsOneUserCreated_whenUserEdited_thenItChangedInDatabase() throws Exception {
-        String employee = objectMapper.writeValueAsString(EMPLOYEE_1);
+    void givenThereIsOneEmployeeCreated_whenEmployeeEdited_thenItChangedInDatabase() throws Exception {
+        String employee = objectMapper.writeValueAsString(EMPLOYEE_DTO_1);
 
         mockMvc.perform(post("/admin/employees/add")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(employee))
                 .andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();
-        int id = EMPLOYEE_1.getId();
-        EMPLOYEE_1.setName("Sofa");
-        String employeeUpdate = objectMapper.writeValueAsString(EMPLOYEE_1);
-
+        int id = EMPLOYEE_DTO_1.getId();
+        EmployeeDTO updateEmployeeDTO1 = new EmployeeDTO(
+                EMPLOYEE_DTO_1.getId(),
+                "Sofa",
+                EMPLOYEE_DTO_1.getSalary(),
+                EMPLOYEE_DTO_1.getPosition()
+        );
+        String employeeUpdate = objectMapper.writeValueAsString(updateEmployeeDTO1);
         mockMvc.perform(put("/admin/employees/update/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(employeeUpdate))
@@ -290,6 +295,7 @@ public class EmployeeAndAdminTests {
                 .andExpect(jsonPath("$").isArray())
                 .andExpect(jsonPath("$.length()").value(2))
                 .andExpect(jsonPath("$[0].positionName").value("Тестировщик"))
+                .andExpect(jsonPath("$[0].name").value("Sonya"))
                 .andExpect(jsonPath("$[1].positionName").value("Тестировщик"));
     }
 

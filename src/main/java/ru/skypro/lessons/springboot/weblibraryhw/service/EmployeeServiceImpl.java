@@ -116,9 +116,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee getEmployeeById(Integer id) {
-        return employeeRepository.findById(id)
+    public EmployeeDTO getEmployeeById(Integer id) {
+        Employee employee = employeeRepository.findById(id)
                 .orElseThrow(EmployeeNotFoundException::new);
+        return EmployeeDTO.fromEmployee(employee);
     }
 
     @Override

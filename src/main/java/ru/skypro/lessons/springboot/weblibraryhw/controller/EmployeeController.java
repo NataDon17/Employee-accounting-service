@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 import ru.skypro.lessons.springboot.weblibraryhw.dto.EmployeeDTO;
 import ru.skypro.lessons.springboot.weblibraryhw.dto.EmployeeFullInfo;
-import ru.skypro.lessons.springboot.weblibraryhw.model.Employee;
 import ru.skypro.lessons.springboot.weblibraryhw.service.EmployeeService;
 
 import java.util.Collection;
@@ -55,7 +54,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/{id}")
-    public Employee getEmployeeById(@PathVariable Integer id) {
+    public EmployeeDTO getEmployeeById(@PathVariable Integer id) {
         logger.debug("Get employee with id {}", id);
         logger.info("Was invoked method to get employee with id {}", id);
         return employeeService.getEmployeeById(id);
