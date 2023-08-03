@@ -1,11 +1,8 @@
 package ru.skypro.lessons.springboot.weblibraryhw.service;
 
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import ru.skypro.lessons.springboot.weblibraryhw.dto.EmployeeDTO;
 import ru.skypro.lessons.springboot.weblibraryhw.dto.EmployeeFullInfo;
-import ru.skypro.lessons.springboot.weblibraryhw.exception.EmployeeNotFoundException;
-import ru.skypro.lessons.springboot.weblibraryhw.model.Employee;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -15,7 +12,7 @@ public interface EmployeeService {
 
     void createEmployee(EmployeeDTO employeeDTO);
 
-    Employee getEmployeeById(Integer id);
+    EmployeeDTO getEmployeeById(Integer id);
 
     void updateEmployeeById(Integer id, EmployeeDTO employeeDTO);
 

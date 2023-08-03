@@ -28,8 +28,6 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static constants.EmployeeConstants.*;
-
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -61,8 +59,8 @@ public class EmployeeServiceImplTest {
     @Test
     public void updateEmployeeByIdIsIdUpdateEmployee() {
         when(employeeRepositoryMock.findById(anyInt()))
-                .thenReturn(Optional.of(EMPLOYEE_1));
-        assertEquals(EMPLOYEE_1, out.getEmployeeById(1));
+                .thenReturn(Optional.of(EMPLOYEE_DTO_1.toEmployee()));
+        assertEquals(EMPLOYEE_DTO_1, out.getEmployeeById(1));
         out.updateEmployeeById(1, EMPLOYEE_DTO_1);
         verify(employeeRepositoryMock, times(1)).save(EMPLOYEE_DTO_1.toEmployee());
     }
@@ -70,8 +68,8 @@ public class EmployeeServiceImplTest {
     @Test
     public void getEmployeeByIdIsIdReturnEmployee() {
         when(employeeRepositoryMock.findById(anyInt()))
-                .thenReturn(Optional.of(EMPLOYEE_1));
-        assertEquals(EMPLOYEE_1, out.getEmployeeById(1));
+                .thenReturn(Optional.of(EMPLOYEE_DTO_1.toEmployee()));
+        assertEquals(EMPLOYEE_DTO_1, out.getEmployeeById(1));
         verify(employeeRepositoryMock, times(1)).findById(anyInt());
     }
 
@@ -186,7 +184,7 @@ public class EmployeeServiceImplTest {
                 25000,
                 new Position(2, "Разработчик"));
         Employee employeeEmpty = new Employee();
-        Employee employeeDefault = new Employee(1, "по умолчанию", 0, null);
+        Employee employeeDefault = new Employee(1, "по умолчанию", 0, new Position());
         return Stream.of(
                 Arguments.of(employeeCorrect, "Корректный сотрудник"),
                 Arguments.of(employeeEmpty, "Поля сотрудника не заполнены"),
