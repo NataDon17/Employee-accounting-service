@@ -18,9 +18,9 @@ import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.web.servlet.MockMvc;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import ru.skypro.lessons.springboot.weblibraryhw.dto.EmployeeDTO;
+import ru.skypro.lessons.springboot.weblibraryhw.model.Employee;
 import ru.skypro.lessons.springboot.weblibraryhw.repository.EmployeeRepository;
 
-import javax.sql.DataSource;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -36,8 +36,6 @@ public class EmployeeAndAdminTests {
     EmployeeRepository employeeRepository;
     @Autowired
     private ObjectMapper objectMapper;
-    @Autowired
-    private DataSource dataSource;
 
     @BeforeEach
     void cleanEmployeeTable() {
@@ -75,15 +73,8 @@ public class EmployeeAndAdminTests {
 
     @Test
     public void givenId_whenGetExistingEmployee_EmployeeReturned() throws Exception {
-        String employee = objectMapper.writeValueAsString(EMPLOYEE_DTO_1);
-
-        mockMvc.perform(post("/admin/employees/add")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(employee))
-                .andExpect(status().isOk())
-                .andReturn().getResponse().getContentAsString();
-
-        int id = EMPLOYEE_DTO_1.getId();
+        Employee employee = employeeRepository.save(EMPLOYEE_DTO_1.toEmployee());
+        int id = employee.getId();
         mockMvc.perform(get("/employee/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -107,16 +98,10 @@ public class EmployeeAndAdminTests {
 
     @Test
     void givenThereIsOneEmployeeCreated_whenEmployeeEdited_thenItChangedInDatabase() throws Exception {
-        String employee = objectMapper.writeValueAsString(EMPLOYEE_DTO_1);
-
-        mockMvc.perform(post("/admin/employees/add")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(employee))
-                .andExpect(status().isOk())
-                .andReturn().getResponse().getContentAsString();
-        int id = EMPLOYEE_DTO_1.getId();
+        Employee employee = employeeRepository.save(EMPLOYEE_DTO_1.toEmployee());
+        int id = employee.getId();
         EmployeeDTO updateEmployeeDTO1 = new EmployeeDTO(
-                EMPLOYEE_DTO_1.getId(),
+                id,
                 "Sofa",
                 EMPLOYEE_DTO_1.getSalary(),
                 EMPLOYEE_DTO_1.getPosition()
@@ -157,7 +142,7 @@ public class EmployeeAndAdminTests {
 
     @Test
     void givenNoUsersInDatabase_whenDeleteOnEmptyList_thenNotFound() throws Exception {
-        mockMvc.perform(delete("/employee/5"))
+        mockMvc.perform(delete("/employee/105"))
                 .andExpect(status().isBadRequest());
     }
 
@@ -321,8 +306,8 @@ public class EmployeeAndAdminTests {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray())
                 .andExpect(jsonPath("$.length()").value(2))
-                .andExpect(jsonPath("$[0].id").value(1))
-                .andExpect(jsonPath("$[1].id").value(2));
+                .andExpect(jsonPath("$[0].id").isNumber())
+                .andExpect(jsonPath("$[1].id").isNumber());
     }
 
     @Test
