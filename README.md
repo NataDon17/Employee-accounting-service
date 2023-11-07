@@ -18,7 +18,7 @@
 
 ## Используемые библиотеки и технологии:
 - Java
-- Sring Boot
+- Spring Boot
 - Spring Security
 - Liquibase
 - Lombok
