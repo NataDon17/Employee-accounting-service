@@ -17,11 +17,8 @@
 - получение отчета в виде файла с количеством сотрудников по отделам, максимальной, минимальной и средней зарплаты в отделе
 
 ## Используемые библиотеки и технологии:
-- Java
-- Spring Boot
-- Spring Security
-- Liquibase
-- Lombok
-- Hibernate
-- База данных PostgreSQL
-- Swagger
+Язык и окружение: Java 17, Spring Boot/Web/Security/Admin, Hibernate, PostgreSQL, Liquibase.
+
+Тестирование: JUnit, Mockito
+
+Прочее: Docker,Swagger
